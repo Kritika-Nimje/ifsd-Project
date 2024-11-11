@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <title>Daily Routine Planner</title>
+    <script src="lib/react.development.js"></script>
+    <script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
+    <link rel="stylesheet" href="/css/logic.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center my-4">Daily Routine Planner</h1>
+        
+        <!-- Form for adding tasks -->
+        <form id="routine-form" class="mb-4">
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <input type="text" id="task-name" class="form-control" placeholder="Task Name" required />
+                </div>
+                <div class="col-md-3">
+                    <select id="task-category" class="form-control" required>
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="Work">Work</option>
+                        <option value="Study">Study</option>
+                        <option value="Fitness">Fitness</option>
+                        <option value="Personal">Personal</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select id="task-priority" class="form-control" required>
+                        <option value="" disabled selected>Select Priority</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <input type="date" id="task-due-date" class="form-control" required />
+                </div>
+                <div class="col-md-2">
+                    <button type="button" onclick="addTask()" class="btn btn-primary btn-block">Add Task</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Task Table -->
+        <div class="routine-table">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Category</th>
+                        <th>Priority</th>
+                        <th>Due Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="routine-list"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- JavaScript to manage tasks -->
+    <script type="text/javascript">
+        // Array to store tasks
+        let tasks = [];
+
+        // Function to add a new task
+        function addTask() {
+            const taskName = document.getElementById('task-name').value;
+            const taskCategory = document.getElementById('task-category').value;
+            const taskPriority = document.getElementById('task-priority').value;
+            const taskDueDate = document.getElementById('task-due-date').value;
+
+            if (taskName && taskCategory && taskPriority && taskDueDate) {
+                const newTask = {
+                    id: Date.now(),
+                    name: taskName,
+                    category: taskCategory,
+                    priority: taskPriority,
+                    dueDate: taskDueDate
+                };
+                tasks.push(newTask);
+                renderTasks();
+                resetForm();
+            }
+        }
+
+        // Function to render the task list
+        function renderTasks() {
+            const taskList = document.getElementById('routine-list');
+            taskList.innerHTML = '';
+
+            tasks.forEach(task => {
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td>${task.name}</td>
+                    <td>${task.category}</td>
+                    <td>${task.priority}</td>
+                    <td>${task.dueDate}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning" onclick="editTask(${task.id})">Edit</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteTask(${task.id})">Delete</button>
+                    </td>
+                `;
+                taskList.appendChild(row);
+            });
+        }
+
+        // Function to reset the form fields after adding or editing a task
+        function resetForm() {
+            document.getElementById('task-name').value = '';
+            document.getElementById('task-category').value = '';
+            document.getElementById('task-priority').value = '';
+            document.getElementById('task-due-date').value = '';
+        }
+
+        // Function to delete a task by id
+        function deleteTask(id) {
+            tasks = tasks.filter(task => task.id !== id);
+            renderTasks();
+        }
+
+        // Function to edit a task by id
+        function editTask(id) {
+            const task = tasks.find(task => task.id === id);
+            if (task) {
+                // Pre-fill form with the task data
+                document.getElementById('task-name').value = task.name;
+                document.getElementById('task-category').value = task.category;
+                document.getElementById('task-priority').value = task.priority;
+                document.getElementById('task-due-date').value = task.dueDate;
+
+                // Update the "Add Task" button to "Save Changes"
+                const addButton = document.querySelector('#routine-form button');
+                addButton.innerText = 'Save Changes';
+                addButton.onclick = function () {
+                    saveTaskChanges(id);
+                };
+            }
+        }
+
+        // Function to save task changes
+        function saveTaskChanges(id) {
+            const taskName = document.getElementById('task-name').value;
+            const taskCategory = document.getElementById('task-category').value;
+            const taskPriority = document.getElementById('task-priority').value;
+            const taskDueDate = document.getElementById('task-due-date').value;
+
+            const taskIndex = tasks.findIndex(task => task.id === id);
+            if (taskIndex > -1) {
+                tasks[taskIndex] = { id, name: taskName, category: taskCategory, priority: taskPriority, dueDate: taskDueDate };
+                renderTasks();
+                resetForm();
+
+                // Revert the "Save Changes" button back to "Add Task"
+                const addButton = document.querySelector('#routine-form button');
+                addButton.innerText = 'Add Task';
+                addButton.onclick = addTask;
+            }
+        }
+    </script>
+
+    <!-- Required Scripts for Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

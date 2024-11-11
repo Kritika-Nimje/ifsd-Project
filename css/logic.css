@@ -1,0 +1,88 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11 Nov, 2024, 1:53:44 PM
+    Author     : karti
+*/
+
+/* styles.css */
+
+body {
+    background-image: url('flat-lay-desk-concept-with-copy-space.jpg'); /* Replace with the actual path to your image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent for readability */
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    margin: 50px auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #4CAF50;
+}
+
+form table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.expense-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.expense-table th,
+.expense-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.total-amount {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: right;
+}
+
+.filter {
+    margin-top: 20px;
+    text-align: right;
+}

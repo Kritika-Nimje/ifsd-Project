@@ -1,0 +1,56 @@
+/* Welcome page CSS file */
+
+/* Centering and spacing for headings */
+.heading {
+    text-align: center;
+    margin-top: 150px;
+    color: black;
+}
+
+.heading1 {
+    text-align: center;
+    margin-top: 20px;
+    color: black;
+}
+
+/* Button container styling */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Sign-up button styling */
+.sign-up-button {
+    width: 200px;
+    height: 50px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 20px;
+    background-color: transparent; /* Main button color */
+    color: rgb(5, 5, 5);
+    border: solid;
+    border-color: rgb(9, 9, 9);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sign-up-button:hover {
+    background-color: blueviolet; /* Softer pink hover color for contrast */
+}
+
+/* Navbar brand styling */
+.expanse {
+    color: white; /* Pink color */
+    font-weight: bold; /* Apply bold font weight */
+    font-size: 1.5rem; /* Increase font size */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Short description styling */
+.shortdec {
+    text-align: left;
+    margin-top: 300px;
+    margin-left: 20px;
+    padding: 10px;
+}
