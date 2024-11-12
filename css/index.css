@@ -1,6 +1,4 @@
-/* Welcome page CSS file */
 
-/* Centering and spacing for headings */
 .heading {
     text-align: center;
     margin-top: 150px;
@@ -49,8 +47,10 @@
 
 /* Short description styling */
 .shortdec {
-    text-align: left;
-    margin-top: 300px;
+    text-align: center;
+    margin-top: 20px;
     margin-left: 20px;
     padding: 10px;
+    justify-content: center;
+    color: black;
 }
